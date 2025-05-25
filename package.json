@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node src/index",
+    "start": "npx ts-node src/index.ts",
     "build": "tsc"
   },
   "dependencies": {

@@ -5,7 +5,6 @@ services:
     build: .
     container_name: order-service
     ports:
-      - '3000:3000'
-    environment:
-      - MONGO_URI=mongodb://root:example@mongo:27017/order-service?authSource=admin
-      - JWT_SECRET=your_jwt_secret
+      - '8082:8082'
+    env_file:
+      - .env
