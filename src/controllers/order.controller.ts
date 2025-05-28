@@ -16,7 +16,7 @@ export const createOrder = async (req: Request, res: Response) => {
 
 export const getOrders = async (req: Request, res: Response) => {
     try {
-        const orders = await Order.find({ userId: req.user?.UserID });
+        const orders = await Order.find();
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: 'Ошибка при получении заказов.', error });
