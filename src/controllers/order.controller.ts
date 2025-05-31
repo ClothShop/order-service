@@ -23,9 +23,29 @@ export const getOrders = async (req: Request, res: Response) => {
     }
 };
 
-export const getOrderById = async (req: Request, res: Response) => {
+export const getMyOrders = async (req: Request, res: Response) => {
     try {
         const order = await Order.find().where('userId').equals(req.user?.UserID);
+        if (!order) return res.status(200).json({ message: 'Заказ не найден.', order: []});
+        res.status(200).json(order);
+    } catch (error) {
+        res.status(500).json({ message: 'Ошибка при получении заказа.' });
+    }
+};
+
+export const getOrderById = async (req: Request, res: Response) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(200).json({ message: 'Заказ не найден.', order: null});
+        res.status(200).json(order);
+    } catch (error) {
+        res.status(500).json({ message: 'Ошибка при получении заказа.' });
+    }
+};
+
+export const getUserOrders = async (req: Request, res: Response) => {
+    try {
+        const order = await Order.find().where('userId').equals(req.params.id);
         if (!order) return res.status(200).json({ message: 'Заказ не найден.', order: []});
         res.status(200).json(order);
     } catch (error) {
